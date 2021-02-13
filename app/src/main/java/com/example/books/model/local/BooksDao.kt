@@ -1,4 +1,4 @@
-package com.example.books
+package com.example.books.model.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -10,8 +10,11 @@ import androidx.room.Query
 interface BooksDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllBooksDao(list: List<BooksEntity>)
+    suspend fun insertAllBooks(list: List<BooksEntity>)
 
     @Query("SELECT * FROM books_table")
-    fun getAllBooksDaoDB(): LiveData<List<String>>
+    fun getAllBooksDB(): LiveData<List<BooksEntity>>
+
+    @Query("SELECT * FROM books_table WHERE id = :id")
+    fun getBooksById(id: String) : LiveData<BooksEntity>
 }

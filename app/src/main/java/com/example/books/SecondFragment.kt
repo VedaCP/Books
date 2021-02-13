@@ -6,13 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.books.databinding.FragmentSecondBinding
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -42,17 +39,16 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = TitleAdapter()
-        binding.tvTitle.text = it.list()
-        binding.tvTitle.text = it.toString()
-        viewModel.getFetchBooksWhitCoroutines(idTitle).observe(viewLifecycleOwnerLiveData,
-        androidx.lifecycle.Observer {
-            it?.let {
-                Log.d("segundo fragmento", "$it")
-                adapter.update(it)
+        var adapter = TitleAdapter()
+        binding.rvTitle.adapter = adapter
+        binding.rvTitle.layoutManager = GridLayoutManager(context, 2)
+        viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                it?.let {
+                    Log.d("segundo fragmento", "$it")
+                   // adapter.update(it)
             }
         })
-
     }
 
 }

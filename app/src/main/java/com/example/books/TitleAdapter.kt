@@ -1,6 +1,5 @@
 package com.example.books
 
-import android.icu.text.CaseMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.books.databinding.ItemBooksBinding
 import com.example.books.databinding.ItemTitleBinding
+import com.example.books.model.local.BooksEntity
 
 class TitleAdapter: RecyclerView.Adapter<TitleAdapter.TitleVH>() {
 
@@ -29,7 +29,7 @@ class TitleAdapter: RecyclerView.Adapter<TitleAdapter.TitleVH>() {
             binding.tvEditorial.text = title.list
             binding.tvAutor.text = title.list
             binding.tvPrint.text = title.list
-            binding.tvPages.text = title.list
+            binding.tvPage.text = title.list
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {

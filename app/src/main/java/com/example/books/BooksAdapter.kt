@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.books.databinding.ItemBooksBinding
+import com.example.books.model.local.BooksEntity
 
 class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksVH>() {
 
@@ -14,7 +15,7 @@ class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksVH>() {
     private val selectedBooks = MutableLiveData<BooksEntity>()
     fun selectedItem() = selectedBooks
 
-    fun update(list: List<String>) {
+    fun update(list: List<BooksEntity>) {
         listBooksEntityAdapterItem = list
         notifyDataSetChanged()
     }
