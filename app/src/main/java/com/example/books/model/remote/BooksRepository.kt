@@ -10,11 +10,15 @@ class BooksRepository(private val dao: BooksDao) {
 
     private val services = BooksRetrofitClient.retrofitInstance()
     val listBooks: LiveData<List<BooksEntity>> = dao.getAllBooksDB()
+    val booksList: LiveData<List<BooksEntity>> = dao.getBooksList()
 
     fun converter(converter: List<BooksResponse>) : List<BooksEntity> {
         val listBooksEntity : MutableList<BooksEntity> = mutableListOf()
         converter.map {
-           listBooksEntity.add(BooksEntity(it.autor, it.editorial, it.print, it.pages,))
+           listBooksEntity.add(BooksEntity(id = it.id,
+               titulo = it.titulo, editorial = it.editorial,
+               autor = it.autor, lugar_impresion = it.lugar_impresion,
+                paginas = it.paginas))
         }
         return listBooksEntity
     }
@@ -24,7 +28,7 @@ class BooksRepository(private val dao: BooksDao) {
             val response = BooksRetrofitClient.retrofitInstance().fetchBooksList()
             when (response.isSuccessful) {
                 true -> response.body()?.let {
-                  dao.insertAllBooks(it)
+                    dao.insertAllBooks(converter(it))
                 }
                 false -> Log.d("ERROR", "${response.code()} : ${response.errorBody()}")
             }

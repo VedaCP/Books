@@ -9,14 +9,14 @@ data class BooksEntity(@PrimaryKey val list: String,
                        @SerializedName("id")
                        val id: String,
                        @SerializedName("books")
-                       val books: String,
+                       val titulo: String,
                        @SerializedName("Editorial")
                        val editorial: String,
                        @SerializedName("Autor")
                        val autor: String,
                        @SerializedName("Lugar de impresión")
-                       val print: String,
+                       val lugar_impresion: String,
                        @SerializedName("Páginas")
-                       val pages: String)
+                       val paginas: String)
 
 
