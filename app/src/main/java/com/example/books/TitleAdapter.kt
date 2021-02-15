@@ -26,10 +26,10 @@ class TitleAdapter: RecyclerView.Adapter<TitleAdapter.TitleVH>() {
     inner class TitleVH(private val binding: ItemTitleBinding) : RecyclerView.ViewHolder
         (binding.root), View.OnClickListener {
         fun bind(title: BooksEntity) {
-            binding.tvEditorial.text = title.list
-            binding.tvAutor.text = title.list
-            binding.tvPrint.text = title.list
-            binding.tvPage.text = title.list
+            binding.tvEditorial.text = title.id
+            binding.tvAutor.text = title.id
+            binding.tvPrint.text = title.id
+            binding.tvPage.text = title.id
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {

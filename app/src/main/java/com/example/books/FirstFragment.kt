@@ -33,7 +33,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = BooksAdapter()
         binding.rvBooksList.adapter = adapter
-        binding.rvBooksList.layoutManager = GridLayoutManager(context, 2)
+        binding.rvBooksList.layoutManager = GridLayoutManager(context, 1)
 
         viewModel.booksEntityLiveDataFromDB.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -41,14 +41,14 @@ class FirstFragment : Fragment() {
                 adapter.update(it)
             }
         })
-  /*      adapter.selectedItem().observe(viewLifecycleOwner, Observer {
+        adapter.selectedItem().observe(viewLifecycleOwner, Observer {
             it?.let {
                 val bundle = Bundle()
-                bundle.putString("list", it.list)
-                viewModel.getFetchBooksWhitCoroutines(it.list)
+                bundle.putString("list", it.id)
+                viewModel.getFetchBooksWhitCoroutines(it.id)
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
             }
-        })*/
+        })
 
     }
 }

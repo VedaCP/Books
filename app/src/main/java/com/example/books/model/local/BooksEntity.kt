@@ -5,18 +5,16 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "books_table")
-data class BooksEntity(@PrimaryKey val list: String,
-                       @SerializedName("id")
-                       val id: String,
+data class BooksEntity(@PrimaryKey val id: String,
                        @SerializedName("books")
                        val titulo: String,
-                       @SerializedName("Editorial")
+                       @SerializedName("editorial")
                        val editorial: String,
-                       @SerializedName("Autor")
+                       @SerializedName("autor")
                        val autor: String,
-                       @SerializedName("Lugar de impresión")
+                       @SerializedName("lugar_impresion")
                        val lugar_impresion: String,
-                       @SerializedName("Páginas")
+                       @SerializedName("paginas")
                        val paginas: String)
 
 

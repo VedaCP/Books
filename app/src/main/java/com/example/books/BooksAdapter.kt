@@ -1,5 +1,6 @@
 package com.example.books
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,8 @@ class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksVH>() {
     inner class BooksVH(private val binding: ItemBooksBinding) : RecyclerView.ViewHolder
         (binding.root), View.OnClickListener {
             fun bind(booksEntity: BooksEntity) {
-                binding.tvBooksList.text = booksEntity.list
+                binding.tvBooksList.text = booksEntity.id
+                Log.d("Lista de Libros", "${booksEntity.id}")
                 itemView.setOnClickListener(this)
             }
 

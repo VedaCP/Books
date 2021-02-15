@@ -41,14 +41,14 @@ class SecondFragment : Fragment() {
 
         var adapter = TitleAdapter()
         binding.rvTitle.adapter = adapter
-        binding.rvTitle.layoutManager = GridLayoutManager(context, 2)
-        viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
+        binding.rvTitle.layoutManager = GridLayoutManager(context, 1)
+      /*  viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
             androidx.lifecycle.Observer {
                 it?.let {
                     Log.d("segundo fragmento", "$it")
                    // adapter.update(it)
             }
-        })
+        })*/
     }
 
 }

@@ -11,17 +11,20 @@ abstract class BooksDataBase : RoomDatabase() {
 
     abstract fun getBooksDao() : BooksDao
     companion object {
+        @Volatile
         private var INSTANCE : BooksDataBase? = null
-        fun getDataBase(context: Context): BooksDataBase {
-            return INSTANCE ?: synchronized(this){
-                val temInstance = Room.databaseBuilder(context.applicationContext,
-                BooksDataBase::class.java,
-                "books_db")
-                    .build()
-                INSTANCE = temInstance
-                temInstance
+        fun getBooksDataBase(context: Context): BooksDataBase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(context.applicationContext,
+                        BooksDataBase::class.java, "BooksDataBase")
+                        .build()
+                INSTANCE = instance
+                return instance
             }
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.books
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -15,20 +16,21 @@ class BooksViewModel(application: Application): AndroidViewModel(application) {
     val booksEntityLiveDataFromDB: LiveData<List<BooksEntity>>
 
     init {
-        val dao = BooksDataBase.getDataBase(application).getBooksDao()
+        val dao = BooksDataBase.getBooksDataBase(application).getBooksDao()
         repository = BooksRepository(dao)
         viewModelScope.launch {
             repository.getBooksWhitCoroutines()
         }
         booksEntityLiveDataFromDB = repository.listBooks
+        Log.d("liveData", "$booksEntityLiveDataFromDB")
     }
-    fun getFetchBooksWhitCoroutines() = viewModelScope.launch {
+/*    fun getFetchBooksWhitCoroutines() = viewModelScope.launch {
         repository.getBooksWhitCoroutines()
-    }
-    fun getBooksById(id: String) : LiveData<BooksEntity> {
-        return repository.getBooksById(id)
-    }
-  /*  fun getFetchBooksWhitCoroutines(id: String) = viewModelScope.launch {
-        repository.getBooksById(id)
     }*/
+/*    fun getBooksById(id: String) : LiveData<BooksEntity> {
+        return repository.getBooksById(id)
+    }*/
+   fun getFetchBooksWhitCoroutines(id: String) = viewModelScope.launch {
+        repository.getBooksById(id)
+    }
 }
