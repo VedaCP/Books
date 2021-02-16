@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.books.model.local.BooksDataBase
-import com.example.books.model.local.BooksEntity
+import com.example.books.model.pojo.BooksEntity
 import com.example.books.model.remote.BooksRepository
 import kotlinx.coroutines.launch
 
@@ -14,6 +14,7 @@ class BooksViewModel(application: Application): AndroidViewModel(application) {
 
     private val repository: BooksRepository
     val booksEntityLiveDataFromDB: LiveData<List<BooksEntity>>
+
 
     init {
         val dao = BooksDataBase.getBooksDataBase(application).getBooksDao()
@@ -24,12 +25,18 @@ class BooksViewModel(application: Application): AndroidViewModel(application) {
         booksEntityLiveDataFromDB = repository.listBooks
         Log.d("liveData", "$booksEntityLiveDataFromDB")
     }
-/*    fun getFetchBooksWhitCoroutines() = viewModelScope.launch {
+   fun getFetchBooksWhitCoroutines() = viewModelScope.launch {
         repository.getBooksWhitCoroutines()
-    }*/
-/*    fun getBooksById(id: String) : LiveData<BooksEntity> {
+    }
+    fun updateFavBooks(booksEntity: BooksEntity) = viewModelScope.launch {
+        repository.updateFavBooks(booksEntity)
+    }
+
+   fun getAllFavBooks(): LiveData<BooksEntity> = repository.listFavBooks
+
+   fun getBooksById(id: String) : LiveData<BooksEntity> {
         return repository.getBooksById(id)
-    }*/
+    }
    fun getFetchBooksWhitCoroutines(id: String) = viewModelScope.launch {
         repository.getBooksById(id)
     }

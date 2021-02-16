@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class BooksDataClass (@SerializedName ("id")
                            val id: String,
-                           @SerializedName("book_list")
+                           @SerializedName("titulo")
                            val titulo: String,
                            @SerializedName("editorial")
                            val editorial: String,
@@ -13,4 +13,6 @@ data class BooksDataClass (@SerializedName ("id")
                            @SerializedName("lugar_impresion")
                            val lugar_impresion: String,
                            @SerializedName("paginas")
-                           val paginas: String)
+                           val paginas: String,
+                           @SerializedName("fav")
+                           var fav: Boolean)

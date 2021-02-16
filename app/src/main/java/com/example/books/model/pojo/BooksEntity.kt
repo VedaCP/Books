@@ -1,12 +1,13 @@
-package com.example.books.model.local
+package com.example.books.model.pojo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "books_table")
-data class BooksEntity(@PrimaryKey val id: String,
-                       @SerializedName("books")
+data class BooksEntity(@SerializedName("id")
+                       @PrimaryKey val id: String,
+                       @SerializedName("ttulo")
                        val titulo: String,
                        @SerializedName("editorial")
                        val editorial: String,
@@ -15,6 +16,9 @@ data class BooksEntity(@PrimaryKey val id: String,
                        @SerializedName("lugar_impresion")
                        val lugar_impresion: String,
                        @SerializedName("paginas")
-                       val paginas: String)
+                       val paginas: String,
+                       @SerializedName("fav")
+                       var fav: Boolean)
+
 
 

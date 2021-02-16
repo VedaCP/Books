@@ -43,6 +43,7 @@ class FirstFragment : Fragment() {
         })
         adapter.selectedItem().observe(viewLifecycleOwner, Observer {
             it?.let {
+                Log.d("LISTA BOOKS", (it.id))
                 val bundle = Bundle()
                 bundle.putString("list", it.id)
                 viewModel.getFetchBooksWhitCoroutines(it.id)

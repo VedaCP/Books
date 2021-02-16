@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.books.databinding.FragmentSecondBinding
@@ -39,16 +40,30 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapter = TitleAdapter()
-        binding.rvTitle.adapter = adapter
-        binding.rvTitle.layoutManager = GridLayoutManager(context, 1)
-      /*  viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
+        var adapter = BooksAdapter()
+        viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
             androidx.lifecycle.Observer {
                 it?.let {
+                    binding.tvTitulo.text = it.titulo
+                    binding.tvEditorial.text = it.editorial
+                    binding.tvAutor.text = it.autor
+                    binding.tvLugarImpresion.text = it.lugar_impresion
+                    binding.tvPaginas.text = it.paginas
                     Log.d("segundo fragmento", "$it")
-                   // adapter.update(it)
-            }
-        })*/
+                }
+        })
+        adapter.selectedItem().observe(viewLifecycleOwner, {
+            it?.let {
+                if (it.fav) {
+                    it.fav = false
+                    viewModel.updateFavBooks(it)
+                    Toast.makeText(context, "Eliminado de fav", Toast.LENGTH_LONG).show()
+                    } else {
+                    it.fav = true
+                    viewModel.updateFavBooks(it)
+                    Toast.makeText(context, "Añadido a fav", Toast.LENGTH_LONG).show()
+                }
+           }
+        })
     }
-
 }
