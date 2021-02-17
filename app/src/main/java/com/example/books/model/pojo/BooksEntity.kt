@@ -17,8 +17,8 @@ data class BooksEntity(@SerializedName("id")
                        val lugar_impresion: String,
                        @SerializedName("paginas")
                        val paginas: String,
-                       @SerializedName("fav")
-                       var fav: Boolean)
+
+                       var fav: Boolean)//Agregué ésta línea
 
 
 

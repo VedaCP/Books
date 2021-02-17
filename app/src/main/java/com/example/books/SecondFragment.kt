@@ -42,16 +42,16 @@ class SecondFragment : Fragment() {
 
         var adapter = BooksAdapter()
         viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
-            androidx.lifecycle.Observer {
-                it?.let {
-                    binding.tvTitulo.text = it.titulo
-                    binding.tvEditorial.text = it.editorial
-                    binding.tvAutor.text = it.autor
-                    binding.tvLugarImpresion.text = it.lugar_impresion
-                    binding.tvPaginas.text = it.paginas
-                    Log.d("segundo fragmento", "$it")
-                }
-        })
+                {
+                    it?.let {
+                        binding.tvTitulo.text = it.titulo
+                        binding.tvEditorial.text = it.editorial
+                        binding.tvAutor.text = it.autor
+                        binding.tvLugarImpresion.text = it.lugar_impresion
+                        binding.tvPaginas.text = it.paginas
+                        Log.d("segundo fragmento", "$it")
+                    }
+            })
         adapter.selectedItem().observe(viewLifecycleOwner, {
             it?.let {
                 if (it.fav) {

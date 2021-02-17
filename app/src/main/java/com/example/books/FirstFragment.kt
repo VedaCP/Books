@@ -35,13 +35,13 @@ class FirstFragment : Fragment() {
         binding.rvBooksList.adapter = adapter
         binding.rvBooksList.layoutManager = GridLayoutManager(context, 1)
 
-        viewModel.booksEntityLiveDataFromDB.observe(viewLifecycleOwner, Observer {
+        viewModel.booksEntityLiveDataFromDB.observe(viewLifecycleOwner, {
             it?.let {
                 Log.d("LISTADO", it.toString())
                 adapter.update(it)
             }
         })
-        adapter.selectedItem().observe(viewLifecycleOwner, Observer {
+        adapter.selectedItem().observe(viewLifecycleOwner, {
             it?.let {
                 Log.d("LISTA BOOKS", (it.id))
                 val bundle = Bundle()
