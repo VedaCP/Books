@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.books.databinding.FragmentSecondBinding
+import com.example.books.model.pojo.BooksEntity
 import java.util.*
 
 /**
@@ -40,7 +41,6 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapter = BooksAdapter()
         viewModel.getBooksById(idTitle).observe(viewLifecycleOwner,
                 {
                     it?.let {
@@ -49,21 +49,23 @@ class SecondFragment : Fragment() {
                         binding.tvAutor.text = it.autor
                         binding.tvLugarImpresion.text = it.lugar_impresion
                         binding.tvPaginas.text = it.paginas
+                        saveFav(it)
                         Log.d("segundo fragmento", "$it")
                     }
             })
-        adapter.selectedItem().observe(viewLifecycleOwner, {
-            it?.let {
-                if (it.fav) {
-                    it.fav = false
-                    viewModel.updateFavBooks(it)
-                    Toast.makeText(context, "Eliminado de fav", Toast.LENGTH_LONG).show()
-                    } else {
-                    it.fav = true
-                    viewModel.updateFavBooks(it)
-                    Toast.makeText(context, "Añadido a fav", Toast.LENGTH_LONG).show()
-                }
-           }
-        })
+
+    }
+    fun saveFav (booksEntity: BooksEntity) {
+        binding.btFav.setOnClickListener {
+            if (booksEntity.fav) {
+                booksEntity.fav = false
+                viewModel.updateFavBooks(booksEntity)
+                Toast.makeText(context, "Eliminado de fav", Toast.LENGTH_LONG).show()
+            } else {
+                booksEntity.fav = true
+                viewModel.updateFavBooks(booksEntity)
+                Toast.makeText(context, "Añadido a fav", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
