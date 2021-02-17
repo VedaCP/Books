@@ -32,7 +32,7 @@ class BooksViewModel(application: Application): AndroidViewModel(application) {
         repository.updateFavBooks(booksEntity)
     }
 
-   fun getAllFavBooks(): LiveData<BooksEntity> = repository.listFavBooks
+   fun getAllFavBooks(): LiveData<List<BooksEntity>> = repository.listFavBooks
 
    fun getBooksById(id: String) : LiveData<BooksEntity> {
         return repository.getBooksById(id)

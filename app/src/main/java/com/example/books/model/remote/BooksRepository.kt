@@ -29,7 +29,7 @@ class BooksRepository(private val dao: BooksDao) {
             when (response.isSuccessful) {
                 true -> response.body()?.let {
                     Log.d("REPO", "${it}")
-                    dao.getAllFavBooks()
+                    dao.insertAllBooks(it)
                 }
                 false -> Log.d("ERROR", "${response.code()} : ${response.errorBody()}")
             }

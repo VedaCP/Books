@@ -19,8 +19,8 @@ interface BooksDao {
     @Update
     suspend fun updateFavBooks(booksEntity: BooksEntity)
 
-    @Query("SELECT id FROM books_table WHERE fav = 1")
-    fun getAllFavBooks(): LiveData<BooksEntity>
+    @Query("SELECT * FROM books_table WHERE fav = 1")
+    fun getAllFavBooks(): LiveData<List<BooksEntity>>
 
 
 }

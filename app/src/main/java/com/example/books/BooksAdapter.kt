@@ -29,9 +29,8 @@ class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksVH>() {
                 } else {
                     binding.ivFav.setColorFilter(Color.RED)
                 }
-               /* binding.tvBooksList.text = booksEntity.id
-                Log.d("Lista de Libros", "${booksEntity.id}")*/
-                itemView.setOnClickListener(this)
+               binding.tvBooksList.text = booksEntity.id
+               itemView.setOnClickListener(this)
             }
 
         override fun onClick(v: View?) {
